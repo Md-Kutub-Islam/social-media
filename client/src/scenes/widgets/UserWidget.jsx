@@ -12,6 +12,8 @@ import WidgetWrapper from "../../components/WidgetWrapper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Twitter } from "@mui/icons-material";
+import { LinkedIn } from "@mui/icons-material";
 
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
@@ -23,10 +25,13 @@ const UserWidget = ({ userId, picturePath }) => {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const response = await fetch(`${process.env.BASEURL}/users/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL_BASEURL}/users/${userId}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     setUser(data);
   };
@@ -150,7 +155,8 @@ const UserWidget = ({ userId, picturePath }) => {
         <Link to={twitter} style={{ textDecoration: "none" }}>
           <FlexBetween gap="1rem" mb="0.5rem">
             <FlexBetween gap="1rem">
-              <img src="../assets/twitter.png" alt="twitter" />
+              {/* <img src="../assets/twitter.png" alt="twitter" /> */}
+              <Twitter />
               <Box>
                 <Typography
                   color={main}
@@ -174,7 +180,8 @@ const UserWidget = ({ userId, picturePath }) => {
         <Link to={linkdin} style={{ textDecoration: "none" }}>
           <FlexBetween gap="1rem">
             <FlexBetween gap="1rem">
-              <img src="../assets/linkedin.png" alt="linkedin" />
+              {/* <img src="../assets/linkedin.png" alt="linkedin" /> */}
+              <LinkedIn />
               <Box>
                 <Typography
                   color={main}

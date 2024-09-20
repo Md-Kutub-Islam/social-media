@@ -16,10 +16,13 @@ function DeletePostWidgets(postId) {
   const { _id } = useSelector((state) => state.user);
 
   const getUserPosts = async () => {
-    const response = await fetch(`${process.env.BASEURL}/posts/${_id}/posts`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL_BASEURL}/posts/${_id}/posts`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     setPost(data);
   };
@@ -29,13 +32,16 @@ function DeletePostWidgets(postId) {
   console.log("postIdTwo", postId.postId);
 
   const deletePosts = async (id) => {
-    const response = await fetch(`${process.env.BASEURL}/posts/${id}/delete`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL_BASEURL}/posts/${id}/delete`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     await response.json();
     if (!response.ok) {
       throw new Error("Failed to delete post");

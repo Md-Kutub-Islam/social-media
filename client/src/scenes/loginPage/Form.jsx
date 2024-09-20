@@ -55,6 +55,8 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
+  const apiUrl = import.meta.env.VITE_API_URL_BASEURL;
+
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
     const formData = new FormData();
@@ -63,13 +65,10 @@ const Form = () => {
     }
     formData.append("picturePath", values.picture.name);
     console.log("formData:", formData);
-    const savedUserResponse = await fetch(
-      `${process.env.BASEURL}/auth/register`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const savedUserResponse = await fetch(`${apiUrl}/auth/register`, {
+      method: "POST",
+      body: formData,
+    });
     const savedUser = await savedUserResponse.json();
     console.log("savedUser", savedUser);
     onSubmitProps.resetForm();
@@ -80,12 +79,11 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch(`${process.env.BASEURL}/auth/login`, {
+    const loggedInResponse = await fetch(`${apiUrl}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
-    console.log("BASEURL:", process.env.BASEURL);
 
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();

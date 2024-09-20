@@ -20,6 +20,9 @@ import PostWidget from "../widgets/PostWidget";
 import UserProfilePost from "../widgets/UserProfilePost";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import twitter from "../../assets/twitter.png"
+import { Twitter } from "@mui/icons-material";
+import { LinkedIn } from "@mui/icons-material";
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -35,20 +38,26 @@ function ProfilePage() {
   const main = palette.neutral.main;
 
   const getUser = async () => {
-    const response = await fetch(`${process.env.BASEURL}/users/${id}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL_BASEURL}/users/${id}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     console.log("Data", data);
     setUser(data);
   };
 
   const getUserPosts = async () => {
-    const response = await fetch(`${process.env.BASEURL}/posts/${id}/posts`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL_BASEURL}/posts/${id}/posts`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     setPost(data);
     // dispatch(setPosts({ posts: data }));
@@ -125,7 +134,8 @@ function ProfilePage() {
                 ml="5rem"
                 mb="0.5rem"
               >
-                <img src="../assets/twitter.png" alt="twitter" />
+                {/* <img src="../../assets/twitter.png" alt="twitter" /> */}
+                <Twitter color="gray" />
 
                 <Typography
                   color={main}
@@ -143,7 +153,8 @@ function ProfilePage() {
             </Link>
             <Link to={user.user.linkdin} style={{ textDecoration: "none" }}>
               <Box display="flex" alignItems="center" gap="5px" ml="5rem">
-                <img src="../assets/linkedin.png" alt="linkedin" />
+                {/* <img src="../assets/linkedin.png" alt="linkedin" /> */}
+                <LinkedIn />
 
                 <Typography
                   color={main}

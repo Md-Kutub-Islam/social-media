@@ -12,17 +12,20 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   console.log("posts deatails:", posts);
 
   const getPosts = async () => {
-    const response = await fetch(`${process.env.BASEURL}/posts`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL_BASEURL}/posts`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `${process.env.BASEURL}/posts/${userId}/posts`,
+      `${import.meta.env.VITE_API_URL_BASEURL}/posts/${userId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

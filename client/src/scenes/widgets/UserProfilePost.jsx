@@ -38,7 +38,7 @@ const UserProfilePost = ({
   const patchLike = async () => {
     console.log("postId:", postId);
     const response = await fetch(
-      `${process.env.BASEURL}/posts/${postId}/like`,
+      `${import.meta.env.VITE_API_URL_BASEURL}/posts/${postId}/like`,
       {
         method: "PATCH",
         headers: {
@@ -75,7 +75,7 @@ const UserProfilePost = ({
             marginTop: "0.75rem",
             objectFit: "contain",
           }}
-          src={`${process.env.BASEURL}/assets/${picturePath}`}
+          src={`${import.meta.env.VITE_API_URL_BASEURL}/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">
